@@ -41,6 +41,3 @@ RUN service mysqld start
 
 # プロジェクトフォルダに移動
 WORKDIR /opt/crypto_mf
-
-# bundle install
-RUN /bin/sh -c bundle install

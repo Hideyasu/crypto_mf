@@ -1,5 +1,5 @@
 # 初回の起動の仕方
-# git clone git clone git@github.com:Hideyasu/crypto_mf.git                               <- プロジェクトをgitから持ってくる
+# git clone git@github.com:Hideyasu/crypto_mf.git                                         <- プロジェクトをgitから持ってくる
 # cd crypto_mf                                                                            <- プロジェクトのフォルダに入る
 # docker build -t crypto_mf ./                                                            <- Dockerfileを読み込む
 # docker run -d --name crypto_mf -v "$PWD":/opt/crypto_mf -it -p 3000:3000 crypto_mf bash <- 読み込んだコンテナ(サーバー)を動かす

@@ -43,5 +43,4 @@ RUN service mysqld start
 WORKDIR /opt/crypto_mf
 
 # bundle install
-RUN bundle install
-RUN rails s
+RUN /bin/sh -c bundle install

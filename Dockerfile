@@ -1,7 +1,11 @@
-# 起動の仕方
-# cd 'cryptoがあるフォルダ'
-# docker build -t crypto ./
-# docker run -v 'cryptoがあるフォルダの絶対パス':/opt/crypto -it crypto bash
+# 初回の起動の仕方
+# git clone git clone git@github.com:Hideyasu/crypto_mf.git                               <- プロジェクトをgitから持ってくる
+# cd crypto_mf                                                                            <- プロジェクトのフォルダに入る
+# docker build -t crypto_mf ./                                                            <- Dockerfileを読み込む
+# docker run -d --name crypto_mf -v "$PWD":/opt/crypto_mf -it -p 3000:3000 crypto_mf bash <- 読み込んだコンテナ(サーバー)を動かす
+# docker exec -it crypto_mf bash                                                          <- コンテナ(サーバー)に入る
+# grep ‘temporary password’ /var/log/mysqld.log                                           <- mysqlの初期パスワードを表示する
+# database.ymlのpasswordに上の出力の後ろにある初期パスワードを入力する。finish
 
 FROM centos:6.9
 
@@ -30,5 +34,14 @@ RUN echo 'eval "$(rbenv init --no-rehash -)"' >> /etc/profile.d/rbenv.sh
 RUN source /etc/profile.d/rbenv.sh; rbenv install ${ruby_ver}; rbenv global ${ruby_ver}
 RUN source /etc/profile.d/rbenv.sh; gem update --system; gem install --version ${rails_ver} --no-ri --no-rdoc rails; gem install bundle
 
+# mysqlのインストール
+RUN rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+RUN yum -y install mysql-community-server
+RUN service mysqld start
+
 # プロジェクトフォルダに移動
 WORKDIR /opt/crypto_mf
+
+# bundle install
+RUN bundle install
+RUN rails s

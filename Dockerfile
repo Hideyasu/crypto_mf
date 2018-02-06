@@ -5,8 +5,14 @@
 # docker run -d --name crypto_mf -v "$PWD":/opt/crypto_mf -it -p 3000:3000 crypto_mf bash <- 読み込んだコンテナ(サーバー)を動かす
 # docker exec -it crypto_mf bash                                                          <- コンテナ(サーバー)に入る
 # bundle installl                                                                         <- railsのライブラリの読み込み
-# grep ‘temporary password’ /var/log/mysqld.log                                           <- mysqlの初期パスワードを表示する
+# grep "temporary password" /var/log/mysqld.log                                           <- mysqlの初期パスワードを表示する
 # database.ymlのpasswordに上の出力の後ろにある初期パスワードを入力する。finish
+# docker-machine ip default                                                               <- 作ったコンテナ(サーバー)を調べる
+# rails server                                                                            <- railsを起動する
+# 上で調べたip:3000 にブラウザでアクセスする。 finish
+
+# rakeの動かし方
+# rake hello:hello
 
 FROM centos:6.9
 

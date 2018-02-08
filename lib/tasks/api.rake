@@ -5,5 +5,6 @@ namespace:api do
 
     response = Net::HTTP.get(URI.parse('https://api.bitflyer.jp/v1/getchats?form_date:20180206'))
 
+    print response
   end
 end
